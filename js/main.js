@@ -1,5 +1,5 @@
 var btnRipple = document.getElementById('btnRipple');
-var btnethinium = document.getElementById('btnethinium');
+var btnetherum = document.getElementById('btnetherum');
 var btnbit = document.getElementById('btnbit');
 var btnbitcash = document.getElementById('btnbitcash');
 var buttonCounter = 0;
@@ -29,7 +29,7 @@ btnRipple.addEventListener("click", function(){
 });
 
 
-btnethinium.addEventListener("click", function(){
+btnetherum.addEventListener("click", function(){
   var myRequest = new XMLHttpRequest();
   myRequest.open('GET','https://koinex.in/api/ticker');
   myRequest.onload = function(){
@@ -51,6 +51,29 @@ btnethinium.addEventListener("click", function(){
 });
 
 
+btnbit.addEventListener("click", function(){
+  var myRequest = new XMLHttpRequest();
+  myRequest.open('GET','https://koinex.in/api/ticker');
+  myRequest.onload = function(){
+    if(myRequest.status >= 200 && myRequest.status < 400){
+    var myData = JSON.parse(myRequest.responseText);
+    createHTMLBitcoin(myData);
+
+  }
+  else {
+    console.log("Connect to the server, but returned error")
+  }
+  };
+  myRequest.send();
+  buttonCounter++;
+  if(buttonCounter > 0)
+  {
+    btnbit.classList.add("hide-me");
+  }
+});
+
+
+
 function createHTMLRipple(data){
   var myString = ""
 
@@ -64,9 +87,21 @@ function createHTMLRipple(data){
 function createHTMLEthinium(data){
   var myString = ""
 
-  myString += "<p> The Current Price of Ethinium is: " + data.prices.ETH + "</p>";
-  myString += "<p> The lowest Price of Ethinium in 24 hrs: " + data.stats.ETH.min_24hrs + "</p>";
-  myString += "<p> The highest Price of Ethinium in 24 hrs: " + data.stats.ETH.max_24hrs + "</p>";
-  myString += "<p> The last trade Price of Ethinium is: " + data.stats.ETH.last_traded_price + "</p><br><br>";
+  myString += "<p> The Current Price of Ethereum is: " + data.prices.ETH + "</p>";
+  myString += "<p> The lowest Price of Ethereum in 24 hrs: " + data.stats.ETH.min_24hrs + "</p>";
+  myString += "<p> The highest Price of Ethereum in 24 hrs: " + data.stats.ETH.max_24hrs + "</p>";
+  myString += "<p> The last trade Price of Ethereum is: " + data.stats.ETH.last_traded_price + "</p><br><br>";
+  coinCointainer.insertAdjacentHTML('beforeend',myString);
+}
+
+
+
+function createHTMLBitcoin(data){
+  var myString = ""
+
+  myString += "<p> The Current Price of BitCoin is: " + data.prices.BTC + "</p>";
+  myString += "<p> The lowest Price of BitCoin in 24 hrs: " + data.stats.BTC.min_24hrs + "</p>";
+  myString += "<p> The highest Price of BitCoin in 24 hrs: " + data.stats.BTC.max_24hrs + "</p>";
+  myString += "<p> The last trade Price of BitCoin is: " + data.stats.BTC.last_traded_price + "</p><br><br>";
   coinCointainer.insertAdjacentHTML('beforeend',myString);
 }
