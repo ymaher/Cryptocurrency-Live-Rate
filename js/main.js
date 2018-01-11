@@ -46,7 +46,7 @@ btnetherum.addEventListener("click", function(){
   buttonCounter++;
   if(buttonCounter > 0)
   {
-    btnethinium.classList.add("hide-me");
+    btnetherum.classList.add("hide-me");
   }
 });
 
@@ -69,6 +69,29 @@ btnbit.addEventListener("click", function(){
   if(buttonCounter > 0)
   {
     btnbit.classList.add("hide-me");
+  }
+});
+
+
+
+btnbitcash.addEventListener("click", function(){
+  var myRequest = new XMLHttpRequest();
+  myRequest.open('GET','https://koinex.in/api/ticker');
+  myRequest.onload = function(){
+    if(myRequest.status >= 200 && myRequest.status < 400){
+    var myData = JSON.parse(myRequest.responseText);
+    createHTMLBitcoinCash(myData);
+
+  }
+  else {
+    console.log("Connect to the server, but returned error")
+  }
+  };
+  myRequest.send();
+  buttonCounter++;
+  if(buttonCounter > 0)
+  {
+    btnbitcash.classList.add("hide-me");
   }
 });
 
@@ -103,5 +126,16 @@ function createHTMLBitcoin(data){
   myString += "<p> The lowest Price of BitCoin in 24 hrs: " + data.stats.BTC.min_24hrs + "</p>";
   myString += "<p> The highest Price of BitCoin in 24 hrs: " + data.stats.BTC.max_24hrs + "</p>";
   myString += "<p> The last trade Price of BitCoin is: " + data.stats.BTC.last_traded_price + "</p><br><br>";
+  coinCointainer.insertAdjacentHTML('beforeend',myString);
+}
+
+
+function createHTMLBitcoinCash(data){
+  var myString = ""
+
+  myString += "<p> The Current Price of BitCoin Cash is: " + data.prices.BCH + "</p>";
+  myString += "<p> The lowest Price of BitCoin Cash in 24 hrs: " + data.stats.BCH.min_24hrs + "</p>";
+  myString += "<p> The highest Price of BitCoin Cash in 24 hrs: " + data.stats.BCH.max_24hrs + "</p>";
+  myString += "<p> The last trade Price of BitCoin Cash is: " + data.stats.BCH.last_traded_price + "</p><br><br>";
   coinCointainer.insertAdjacentHTML('beforeend',myString);
 }
