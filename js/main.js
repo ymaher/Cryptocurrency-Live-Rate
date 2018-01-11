@@ -2,6 +2,7 @@ var btnRipple = document.getElementById('btnRipple');
 var btnetherum = document.getElementById('btnetherum');
 var btnbit = document.getElementById('btnbit');
 var btnbitcash = document.getElementById('btnbitcash');
+var btnlitecoin = document.getElementById('btnlitecoin');
 var buttonCounter = 0;
 
 var coinCointainer = document.getElementById('coinCointainer');
@@ -96,6 +97,27 @@ btnbitcash.addEventListener("click", function(){
 });
 
 
+btnlitecoin.addEventListener("click", function(){
+  var myRequest = new XMLHttpRequest();
+  myRequest.open('GET','https://koinex.in/api/ticker');
+  myRequest.onload = function(){
+    if(myRequest.status >= 200 && myRequest.status < 400){
+    var myData = JSON.parse(myRequest.responseText);
+    createHTMLLitcoin(myData);
+
+  }
+  else {
+    console.log("Connect to the server, but returned error")
+  }
+  };
+  myRequest.send();
+  buttonCounter++;
+  if(buttonCounter > 0)
+  {
+    btnlitecoin.classList.add("hide-me");
+  }
+});
+
 
 function createHTMLRipple(data){
   var myString = ""
@@ -137,5 +159,16 @@ function createHTMLBitcoinCash(data){
   myString += "<p> The lowest Price of BitCoin Cash in 24 hrs: " + data.stats.BCH.min_24hrs + "</p>";
   myString += "<p> The highest Price of BitCoin Cash in 24 hrs: " + data.stats.BCH.max_24hrs + "</p>";
   myString += "<p> The last trade Price of BitCoin Cash is: " + data.stats.BCH.last_traded_price + "</p><br><br>";
+  coinCointainer.insertAdjacentHTML('beforeend',myString);
+}
+
+
+function createHTMLLitcoin(data){
+  var myString = ""
+
+  myString += "<p> The Current Price of LiteCoin is: " + data.prices.LTC + "</p>";
+  myString += "<p> The lowest Price of LiteCoin in 24 hrs: " + data.stats.LTC.min_24hrs + "</p>";
+  myString += "<p> The highest Price of LiteCoin in 24 hrs: " + data.stats.LTC.max_24hrs + "</p>";
+  myString += "<p> The last trade Price of LiteCoin is: " + data.stats.LTC.last_traded_price + "</p><br><br>";
   coinCointainer.insertAdjacentHTML('beforeend',myString);
 }
