@@ -1,21 +1,72 @@
-var btn = document.getElementById('btn');
+var btnRipple = document.getElementById('btnRipple');
+var btnethinium = document.getElementById('btnethinium');
+var btnbit = document.getElementById('btnbit');
+var btnbitcash = document.getElementById('btnbitcash');
+var buttonCounter = 0;
+
 var coinCointainer = document.getElementById('coinCointainer');
-btn.addEventListener("click", function(){
+
+btnRipple.addEventListener("click", function(){
+
   var myRequest = new XMLHttpRequest();
   myRequest.open('GET','https://koinex.in/api/ticker');
   myRequest.onload = function(){
+    if(myRequest.status >= 200 && myRequest.status < 400){
     var myData = JSON.parse(myRequest.responseText);
-    createHTML(myData);
+    createHTMLRipple(myData);
+
+  }
+  else {
+    console.log("Connect to the server, but returned error")
+  }
   };
   myRequest.send();
+  buttonCounter++;
+  if(buttonCounter > 0)
+  {
+    btnRipple.classList.add("hide-me");
+  }
 });
 
-function createHTML(data){
+
+btnethinium.addEventListener("click", function(){
+  var myRequest = new XMLHttpRequest();
+  myRequest.open('GET','https://koinex.in/api/ticker');
+  myRequest.onload = function(){
+    if(myRequest.status >= 200 && myRequest.status < 400){
+    var myData = JSON.parse(myRequest.responseText);
+    createHTMLEthinium(myData);
+
+  }
+  else {
+    console.log("Connect to the server, but returned error")
+  }
+  };
+  myRequest.send();
+  buttonCounter++;
+  if(buttonCounter > 0)
+  {
+    btnethinium.classList.add("hide-me");
+  }
+});
+
+
+function createHTMLRipple(data){
   var myString = ""
 
   myString += "<p> The Current Price of Ripple is: " + data.prices.XRP + "</p>";
   myString += "<p> The lowest Price of Ripple in 24 hrs: " + data.stats.XRP.min_24hrs + "</p>";
   myString += "<p> The highest Price of Ripple in 24 hrs: " + data.stats.XRP.max_24hrs + "</p>";
   myString += "<p> The last trade Price of Ripple is: " + data.stats.XRP.last_traded_price + "</p><br><br>";
+  coinCointainer.insertAdjacentHTML('beforeend',myString);
+}
+
+function createHTMLEthinium(data){
+  var myString = ""
+
+  myString += "<p> The Current Price of Ethinium is: " + data.prices.ETH + "</p>";
+  myString += "<p> The lowest Price of Ethinium in 24 hrs: " + data.stats.ETH.min_24hrs + "</p>";
+  myString += "<p> The highest Price of Ethinium in 24 hrs: " + data.stats.ETH.max_24hrs + "</p>";
+  myString += "<p> The last trade Price of Ethinium is: " + data.stats.ETH.last_traded_price + "</p><br><br>";
   coinCointainer.insertAdjacentHTML('beforeend',myString);
 }
