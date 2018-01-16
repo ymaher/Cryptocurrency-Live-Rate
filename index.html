@@ -6,15 +6,27 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Digital Coin Rates</title>
   <link rel="stylesheet" href="./css/style.css">
+
+  <script
+  src="http://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  <script src="./js/script.js"></script>
 </head>
 <body>
   <h1>Crypto Currency Coin Rates.</h1>
   <button id="btnRipple">Ripple</button>
-  <button id="btnetherum">Ethinium</button>
+  <button id="btnetherum">Etherum</button>
   <button id="btnbit">BitCoin</button>
   <button id="btnbitcash">BitCoinCash</button>
   <button id="btnlitecoin">LiteCoin</button>
-  <div id="coinCointainer"></div>
+  <div class="container">
+    <div  class="rippleclass"><h3>Ripple Rates</h3> <div id="rippleCointainer"></div> </div>
+    <div class="ethereumclass"><h3>Ethereum Rates</h3><div id="etherumCointainer"></div> </div>
+    <div class="bitclass"><h3>BitCoin Rates</h3> <div id="bitcoinCointainer"></div> </div>
+    <div class="bitcashclass"><h3>Bit Cash Rates</h3> <div id="bitcashCointainer"></div></div>
+    <div class="liteclass"><h3>Lite Coin Rates</h3> <div id="litecoinCointainer"></div></div>
+  </div>
 
   <script src="./js/main.js"></script>
 </body>

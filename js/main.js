@@ -5,7 +5,11 @@ var btnbitcash = document.getElementById('btnbitcash');
 var btnlitecoin = document.getElementById('btnlitecoin');
 var buttonCounter = 0;
 
-var coinCointainer = document.getElementById('coinCointainer');
+var rippleCointainer = document.getElementById('rippleCointainer');
+var etherumCointainer = document.getElementById('etherumCointainer');
+var bitcoinCointainer = document.getElementById('bitcoinCointainer');
+var bitcashCointainer = document.getElementById('bitcashCointainer');
+var litecoinCointainer = document.getElementById('litecoinCointainer');
 
 btnRipple.addEventListener("click", function(){
 
@@ -36,6 +40,7 @@ btnetherum.addEventListener("click", function(){
   myRequest.onload = function(){
     if(myRequest.status >= 200 && myRequest.status < 400){
     var myData = JSON.parse(myRequest.responseText);
+
     createHTMLEthinium(myData);
 
   }
@@ -122,21 +127,22 @@ btnlitecoin.addEventListener("click", function(){
 function createHTMLRipple(data){
   var myString = ""
 
-  myString += "<p> The Current Price of Ripple is: " + data.prices.XRP + "</p>";
-  myString += "<p> The lowest Price of Ripple in 24 hrs: " + data.stats.XRP.min_24hrs + "</p>";
-  myString += "<p> The highest Price of Ripple in 24 hrs: " + data.stats.XRP.max_24hrs + "</p>";
-  myString += "<p> The last trade Price of Ripple is: " + data.stats.XRP.last_traded_price + "</p><br><br>";
-  coinCointainer.insertAdjacentHTML('beforeend',myString);
+  myString += "<span><p> The Current Price of Ripple is: " + data.prices.XRP + "</p></span>";
+  myString += "<span><p> The lowest Price of Ripple in 24 hrs: " + data.stats.XRP.min_24hrs + "</p></span>";
+  myString += "<span><p> The highest Price of Ripple in 24 hrs: " + data.stats.XRP.max_24hrs + "</p></span>";
+  myString += "<span><p> The last trade Price of Ripple is: " + data.stats.XRP.last_traded_price + "</p></span><br>";
+  rippleCointainer.insertAdjacentHTML('beforeend',myString);
 }
 
 function createHTMLEthinium(data){
   var myString = ""
 
-  myString += "<p> The Current Price of Ethereum is: " + data.prices.ETH + "</p>";
-  myString += "<p> The lowest Price of Ethereum in 24 hrs: " + data.stats.ETH.min_24hrs + "</p>";
-  myString += "<p> The highest Price of Ethereum in 24 hrs: " + data.stats.ETH.max_24hrs + "</p>";
-  myString += "<p> The last trade Price of Ethereum is: " + data.stats.ETH.last_traded_price + "</p><br><br>";
-  coinCointainer.insertAdjacentHTML('beforeend',myString);
+  myString += "<span><p> The Current Price of Ethereum is: " + data.prices.ETH + "</p></span>";
+  myString += "<span><p> The lowest Price of Ethereum in 24 hrs: " + data.stats.ETH.min_24hrs + "</p></span>";
+  myString += "<span><p> The highest Price of Ethereum in 24 hrs: " + data.stats.ETH.max_24hrs + "</p></span>";
+  myString += "<span><p> The last trade Price of Ethereum is: " + data.stats.ETH.last_traded_price + "</p></span><br><br>";
+  etherumCointainer.insertAdjacentHTML('afterend',myString);
+//  document.getElementById('etherumCointainer').innerHtml = myString;
 }
 
 
@@ -148,7 +154,7 @@ function createHTMLBitcoin(data){
   myString += "<p> The lowest Price of BitCoin in 24 hrs: " + data.stats.BTC.min_24hrs + "</p>";
   myString += "<p> The highest Price of BitCoin in 24 hrs: " + data.stats.BTC.max_24hrs + "</p>";
   myString += "<p> The last trade Price of BitCoin is: " + data.stats.BTC.last_traded_price + "</p><br><br>";
-  coinCointainer.insertAdjacentHTML('beforeend',myString);
+  bitcoinCointainer.insertAdjacentHTML('afterend',myString);
 }
 
 
@@ -159,7 +165,7 @@ function createHTMLBitcoinCash(data){
   myString += "<p> The lowest Price of BitCoin Cash in 24 hrs: " + data.stats.BCH.min_24hrs + "</p>";
   myString += "<p> The highest Price of BitCoin Cash in 24 hrs: " + data.stats.BCH.max_24hrs + "</p>";
   myString += "<p> The last trade Price of BitCoin Cash is: " + data.stats.BCH.last_traded_price + "</p><br><br>";
-  coinCointainer.insertAdjacentHTML('beforeend',myString);
+  bitcashCointainer.insertAdjacentHTML('afterend',myString);
 }
 
 
@@ -170,5 +176,5 @@ function createHTMLLitcoin(data){
   myString += "<p> The lowest Price of LiteCoin in 24 hrs: " + data.stats.LTC.min_24hrs + "</p>";
   myString += "<p> The highest Price of LiteCoin in 24 hrs: " + data.stats.LTC.max_24hrs + "</p>";
   myString += "<p> The last trade Price of LiteCoin is: " + data.stats.LTC.last_traded_price + "</p><br><br>";
-  coinCointainer.insertAdjacentHTML('beforeend',myString);
+  litecoinCointainer.insertAdjacentHTML('afterend',myString);
 }
